@@ -1,0 +1,8 @@
+<h4>Album Name: <%= @album.name %></h4>
+
+<p><a href="/albums/<%= @album.id %>/edit">Edit album</a></p>
+<a href="/albums">Return to album list</a>
+
+<% @albums.each do |album| %>
+  <li><a href="/albums/<%= album.id %>"><%= album.name %></a></li>
+<% end %>
