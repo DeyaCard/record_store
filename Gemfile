@@ -4,3 +4,6 @@ gem('sinatra')
 gem('rspec')
 gem('pry')
 gem('sinatra-contrib')
+gem('pg')
+
+

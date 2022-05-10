@@ -7,13 +7,6 @@ describe '#Album' do
     Album.clear()
   end
 
-
-  describe('.all') do
-    it("returns an empty array when there are no albums") do
-      expect(Album.all).to(eq([]))
-    end
-  end
-
   describe('#save') do
     it("saves an album") do
       album = Album.new("Giant Steps", nil)
@@ -24,12 +17,9 @@ describe '#Album' do
     end
   end
 
- 
-  describe('#==') do
-    it("is the same album if it has the same attributes as another album") do
-      album = Album.new("Blue", nil)
-      album2 = Album.new("Blue", nil)
-      expect(album).to(eq(album2))
+  describe('.all') do
+    it("returns an empty array when there are no albums") do
+      expect(Album.all).to(eq([]))
     end
   end
 
@@ -41,6 +31,13 @@ describe '#Album' do
       album2.save()
       Album.clear()
       expect(Album.all).to(eq([]))
+    end
+  end
+  describe('#==') do
+    it("is the same album if it has the same attributes as another album") do
+      album = Album.new("Blue", nil)
+      album2 = Album.new("Blue", nil)
+      expect(album).to(eq(album2))
     end
   end
 
@@ -55,13 +52,13 @@ describe '#Album' do
   end
 
   describe('#update') do
-  it("updates an album by id") do
-    album = Album.new("Giant Steps", nil)
-    album.save()
-    album.update("A Love Supreme")
-    expect(album.name).to(eq("A Love Supreme"))
+    it("updates an album by id") do
+      album = Album.new("Giant Steps", nil)
+      album.save()
+      album.update("A Love Supreme")
+      expect(album.name).to(eq("A Love Supreme"))
+    end
   end
-end
 
   describe('#delete') do
     it("deletes an album by id") do
@@ -73,4 +70,5 @@ end
       expect(Album.all).to(eq([album2]))
     end
   end
+
 end

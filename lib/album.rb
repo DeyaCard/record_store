@@ -1,12 +1,12 @@
 class Album
-  attr_reader :id, :name#Our new save method will need reader methods.
-
+  attr_reader :id, :name
+  attr_accessor :name
   @@albums = {}
-  @@total_rows = 0 # We've added a class variable to keep track of total rows and increment the value when an Album is added.
+  @@total_rows = 0
 
-  def initialize(name, id) # We've added id as a second parameter.
+  def initialize(name, id)
     @name = name
-    @id = id || @@total_rows += 1  # We've added code to handle the id.
+    @id = id || @@total_rows += 1
   end
 
   def self.all
@@ -25,16 +25,17 @@ class Album
     @@albums = {}
     @@total_rows = 0
   end
-  
+
   def self.find(id)
     @@albums[id]
   end
-  
+
   def update(name)
-    @name = name
+    self.name = name
+    @@albums[self.id] = Album.new(self.name, self.id)
   end
 
-  def delete
+  def delete()
     @@albums.delete(self.id)
   end
 end
