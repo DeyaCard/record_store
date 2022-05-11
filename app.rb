@@ -4,6 +4,10 @@ require('./lib/album')
 require('pry')
 also_reload('lib/**/*.rb')
 
+require('pg')
+
+DB = PG.connect({:dbname => "record_store"})
+
 get('/') do
   @albums = Album.all
   erb(:albums)
