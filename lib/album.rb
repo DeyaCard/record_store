@@ -1,12 +1,12 @@
 class Album
-  attr_reader :id, :name
+  attr_reader :id
   attr_accessor :name
   # @@albums = {}
   # @@total_rows = 0
 
-  def initialize(name, id)
-    @name = name
-    @id = id || @@total_rows += 1
+  def initialize(attributes)
+    @name = attributes.fetch(:name)
+    @id = attributes.fetch(:id)
   end
 
   def self.all
@@ -35,9 +35,13 @@ class Album
 
   def self.find(id)
     album = DB.exec("SELECT * FROM albums WHERE id = #{id};").first
-    name = album.fetch("name")
-    id = album.fetch("id").to_i
-    Album.new({:name => name, :id => id})
+    if album
+      name = album.fetch("name")
+      id = album.fetch("id").to_i
+      Album.new({:name => name, :id => id})
+    else
+      nil
+    end
   end
 
   def update(name)
@@ -47,6 +51,11 @@ class Album
 
   def delete
     DB.exec("DELETE FROM albums WHERE id = #{@id};")
-    DB.exec("DELETE FROM songs WHERE album_id = #{@id};") # new code
+    DB.exec("DELETE FROM songs WHERE album_id = #{@id};")
   end
+
+  def songs
+    Songs.find_by_album(self.id)
+  end
+  
 end
