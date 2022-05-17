@@ -1,8 +1,7 @@
 class Album
   attr_reader :id
   attr_accessor :name
-  # @@albums = {}
-  # @@total_rows = 0
+
 
   def initialize(attributes)
     @name = attributes.fetch(:name)
@@ -55,7 +54,7 @@ class Album
   end
 
   def songs
-    Songs.find_by_album(self.id)
+    Song.find_by_album(self.id)
   end
   
 end
